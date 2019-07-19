@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://noahzu.github.io/</id>
     <title>Noah&apos;s Home</title>
-    <updated>2019-07-19T06:12:33.133Z</updated>
+    <updated>2019-07-19T06:14:21.054Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://noahzu.github.io/"/>
     <link rel="self" href="https://noahzu.github.io//atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://noahzu.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Noah&apos;s Home</rights>
     <entry>
-        <title type="html"><![CDATA[Handler中Loop是怎么处理消息的的]]></title>
+        <title type="html"><![CDATA[Handler中Loop是怎么处理消息的]]></title>
         <id>https://noahzu.github.io//post/handler-zhong-loop-shi-zen-me-chu-li-xiao-xi-de-de</id>
         <link href="https://noahzu.github.io//post/handler-zhong-loop-shi-zen-me-chu-li-xiao-xi-de-de">
         </link>
@@ -30,45 +30,46 @@
 <li>
 <p>Handler为何能处理消息？Looper建立以后就会立即执行loop方法，他是一个死循环，不断的取消息Message中有一个Handler的变量名为target，如果target不是空，那么就会调用Message中target的dispatchMessage分发到Handler，由Handler来处理这个消息，这也解释了为什么是同一个消息队列不同的Handler post的消息只能自己执行，就是因为每个消息都有一个target来指明了谁发送的自己就会由谁来处理自己。</p>
 <p>ok，后来面试的时候遇到一个更细的点，那就是sendMessageDelay这种是怎么实现的？如果保证消息的延时发送的？后来去看了看Looper#loop()方法的代码才明白，下边是记录：<br>
-先看一下MessageQueue#enqueueMessage()方法的伪码：<br>
-boolean enqueueMessage(Message msg, long when) {<br>
-//...省略一些判空逻辑..<br>
-synchronized (this) {<br>
-//...省略线程判断逻辑...<br>
-msg.when = when;<br>
-//mMessages是当前消息链表的一个头指针<br>
-Message p = mMessages;</p>
-<pre><code>  					/**
-  					 * 如果入队的消息的时间是0或者时间早于头指针的消息，
-  					 * 就把入队的消息放到前边成为新的头指针
-  					 */
-  					if (p == null || when == 0 || when &lt; p.when) {
-  							msg.next = p;
-  							mMessages = msg;
-  							needWake = mBlocked;
-  					} else {
-  							//否则就去消息队列中一个一个判断，根据时间放在合适的位置
-  							Message prev;
-  							for (; ; ) {
-  									prev = p;
-  									p = p.next;
-  									if (p == null || when &lt; p.when) {
-  											break;
-  									}
-  									if (needWake &amp;&amp; p.isAsynchronous()) {
-  											needWake = false;
-  									}
-  							}
-  							msg.next = p; // invariant: p == prev.next
-  							prev.next = msg;
-  					}
-  					//...省略部分代码
-  			}
-  			return true;
-  	}
-</code></pre>
+先看一下MessageQueue#enqueueMessage()方法的伪码：</p>
 </li>
 </ul>
+<pre><code>boolean enqueueMessage(Message msg, long when) {
+        //...省略一些判空逻辑..
+        synchronized (this) {
+            //...省略线程判断逻辑...
+            msg.when = when;
+            //mMessages是当前消息链表的一个头指针
+            Message p = mMessages;
+
+            /**
+             * 如果入队的消息的时间是0或者时间早于头指针的消息，
+             * 就把入队的消息放到前边成为新的头指针
+             */
+            if (p == null || when == 0 || when &lt; p.when) {
+                msg.next = p;
+                mMessages = msg;
+                needWake = mBlocked;
+            } else {
+                //否则就去消息队列中一个一个判断，根据时间放在合适的位置
+                Message prev;
+                for (; ; ) {
+                    prev = p;
+                    p = p.next;
+                    if (p == null || when &lt; p.when) {
+                        break;
+                    }
+                    if (needWake &amp;&amp; p.isAsynchronous()) {
+                        needWake = false;
+                    }
+                }
+                msg.next = p; // invariant: p == prev.next
+                prev.next = msg;
+            }
+            //...省略部分代码
+        }
+        return true;
+    }
+</code></pre>
 ]]></content>
     </entry>
     <entry>
