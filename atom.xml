@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://noahzu.github.io/</id>
     <title>Noah&apos;s Home</title>
-    <updated>2019-07-19T06:15:38.887Z</updated>
+    <updated>2019-07-19T06:16:51.308Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://noahzu.github.io/"/>
     <link rel="self" href="https://noahzu.github.io//atom.xml"/>
@@ -70,41 +70,6 @@
         return true;
     }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[我的简历]]></title>
-        <id>https://noahzu.github.io//post/resume</id>
-        <link href="https://noahzu.github.io//post/resume">
-        </link>
-        <updated>2019-02-28T08:37:23.000Z</updated>
-        <content type="html"><![CDATA[<p>我的简历</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2018年总结]]></title>
-        <id>https://noahzu.github.io//post/2018-nian-zong-jie</id>
-        <link href="https://noahzu.github.io//post/2018-nian-zong-jie">
-        </link>
-        <updated>2019-02-28T06:45:06.000Z</updated>
-        <summary type="html"><![CDATA[<p>2018总结</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>2018总结</p>
-<!-- more --> 
-<p>2018年总结</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[RxJava2中的操作符总结]]></title>
-        <id>https://noahzu.github.io//post/rxjava2-zhong-de-cao-zuo-fu-zong-jie</id>
-        <link href="https://noahzu.github.io//post/rxjava2-zhong-de-cao-zuo-fu-zong-jie">
-        </link>
-        <updated>2019-02-28T06:38:42.000Z</updated>
-        <summary type="html"><![CDATA[<p>总结RxJava2中的操作符以及他们的应用场景</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>总结RxJava2中的操作符以及他们的应用场景</p>
-<!-- more --> 
-<p>map</p>
 ]]></content>
     </entry>
 </feed>
