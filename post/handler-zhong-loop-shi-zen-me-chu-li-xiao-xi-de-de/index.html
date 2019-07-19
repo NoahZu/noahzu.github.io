@@ -80,8 +80,7 @@
             <div class="post-date">2019-07-19</div>
             
             <div class="post-content">
-              <pre><code>以前面试面Android的消息机制，只知道回答Looper的创建是怎么创建的？MessageQueue是和ThreadLocal相关联的，Looper是死循环不断的取出消息就OK了。大概相关的知识点如下：
-</code></pre>
+              <p>以前面试面Android的消息机制，只知道回答Looper的创建是怎么创建的？MessageQueue是和ThreadLocal相关联的，Looper是死循环不断的取出消息就OK了。大概相关的知识点如下：</p>
 <ul>
 <li>
 <p>每个Handler都会关联一个消息队列，消息队列被封装在Looper中，而每个Looper又会关联一个线程（存放在ThreadLocal中），最终就等于每个消息队列关联一个线程。Handler相当于处理这个消息队列的消息处理器，即使你创建再多的handler，他发消息都会发到同一个消息队列中去，只不过是哪个Handler发的，消息队列会让哪个Handler来处理</p>
@@ -95,50 +94,45 @@
 <li>
 <p>Handler为何能处理消息？Looper建立以后就会立即执行loop方法，他是一个死循环，不断的取消息Message中有一个Handler的变量名为target，如果target不是空，那么就会调用Message中target的dispatchMessage分发到Handler，由Handler来处理这个消息，这也解释了为什么是同一个消息队列不同的Handler post的消息只能自己执行，就是因为每个消息都有一个target来指明了谁发送的自己就会由谁来处理自己。</p>
 <p>ok，后来面试的时候遇到一个更细的点，那就是sendMessageDelay这种是怎么实现的？如果保证消息的延时发送的？后来去看了看Looper#loop()方法的代码才明白，下边是记录：<br>
-先看一下MessageQueue#enqueueMessage()方法的伪码：</p>
+先看一下MessageQueue#enqueueMessage()方法的伪码：<br>
+boolean enqueueMessage(Message msg, long when) {<br>
+//...省略一些判空逻辑..<br>
+synchronized (this) {<br>
+//...省略线程判断逻辑...<br>
+msg.when = when;<br>
+//mMessages是当前消息链表的一个头指针<br>
+Message p = mMessages;</p>
+<pre><code>  					/**
+  					 * 如果入队的消息的时间是0或者时间早于头指针的消息，
+  					 * 就把入队的消息放到前边成为新的头指针
+  					 */
+  					if (p == null || when == 0 || when &lt; p.when) {
+  							msg.next = p;
+  							mMessages = msg;
+  							needWake = mBlocked;
+  					} else {
+  							//否则就去消息队列中一个一个判断，根据时间放在合适的位置
+  							Message prev;
+  							for (; ; ) {
+  									prev = p;
+  									p = p.next;
+  									if (p == null || when &lt; p.when) {
+  											break;
+  									}
+  									if (needWake &amp;&amp; p.isAsynchronous()) {
+  											needWake = false;
+  									}
+  							}
+  							msg.next = p; // invariant: p == prev.next
+  							prev.next = msg;
+  					}
+  					//...省略部分代码
+  			}
+  			return true;
+  	}
+</code></pre>
 </li>
 </ul>
-<blockquote>
-<pre><code>  boolean enqueueMessage(Message msg, long when) {
-  //...省略一些判空逻辑..
-    synchronized (this) {
-        //...省略线程判断逻辑...
-        msg.when = when;
-        //mMessages是当前消息链表的一个头指针
-        Message p = mMessages;
-
-        /** 
-</code></pre>
-<ul>
-<li>如果入队的消息的时间是0或者时间早于头指针的消息，</li>
-<li>就把入队的消息放到前边成为新的头指针<br>
-*/<br>
-if (p == null || when == 0 || when &lt; p.when) {<br>
-msg.next = p;<br>
-mMessages = msg;<br>
-needWake = mBlocked;<br>
-} else {<br>
-//否则就去消息队列中一个一个判断，根据时间放在合适的位置<br>
-Message prev;<br>
-for (;;) {<br>
-prev = p;<br>
-p = p.next;<br>
-if (p == null || when &lt; p.when) {<br>
-break;<br>
-}<br>
-if (needWake &amp;&amp; p.isAsynchronous()) {<br>
-needWake = false;<br>
-}<br>
-}<br>
-msg.next = p; // invariant: p == prev.next<br>
-prev.next = msg;<br>
-}<br>
-//...省略部分代码<br>
-}<br>
-return true;<br>
-}</li>
-</ul>
-</blockquote>
 
             </div>
             
