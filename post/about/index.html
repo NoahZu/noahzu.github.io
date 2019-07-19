@@ -3,14 +3,20 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关于 | Noah&#39;s Home</title>
-<meta name="description" content="Noah&#39;s Home">
+<title>关于 | Noah的blog</title>
+<meta name="description" content="Noah的blog">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="shortcut icon" href="https://noahzu.github.io//favicon.ico">
 <link rel="stylesheet" href="https://noahzu.github.io//styles/main.css">
 
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -28,7 +34,7 @@
     <div class="top-header-container">
       <a class="site-title-container" href="https://noahzu.github.io/">
         <img src="https://noahzu.github.io//images/avatar.png" class="site-logo">
-        <h1 class="site-title">Noah&#39;s Home</h1>
+        <h1 class="site-title">Noah的blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
         <div class="line"></div>
@@ -64,10 +70,10 @@
   </div>
   <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
     <div class="site-description">
-      Noah's Home
+      Noah的blog
     </div>
     <div class="site-footer">
-      Noah's Home
+      Noah的blog
     </div>
   </div>
 </div>
@@ -86,6 +92,12 @@
             
             
 
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
             
 
           </div>
@@ -110,6 +122,29 @@ var app = new Vue({
 })
 
 </script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'e94739d1dd32c6c7ff71',
+        clientSecret: '0e8e373f3d3e0fdb2e9bf9126f5972c4c25d31b2',
+        repo: 'blog-commit',
+        owner: 'Noah',
+        admin: ['Noah'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
