@@ -1,22 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://noahzu.github.io/</id>
-    <title>Noah&apos;s Home</title>
-    <updated>2019-07-19T06:08:46.915Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://noahzu.github.io/"/>
-    <link rel="self" href="https://noahzu.github.io//atom.xml"/>
-    <subtitle>Noah&apos;s Home</subtitle>
-    <logo>https://noahzu.github.io//images/avatar.png</logo>
-    <icon>https://noahzu.github.io//favicon.ico</icon>
-    <rights>All rights reserved 2019, Noah&apos;s Home</rights>
-    <entry>
-        <title type="html"><![CDATA[Handler中Loop是怎么处理消息的的]]></title>
-        <id>https://noahzu.github.io//post/handler-zhong-loop-shi-zen-me-chu-li-xiao-xi-de-de</id>
-        <link href="https://noahzu.github.io//post/handler-zhong-loop-shi-zen-me-chu-li-xiao-xi-de-de">
-        </link>
-        <updated>2019-07-19T03:46:23.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>以前面试面Android的消息机制，只知道回答Looper的创建是怎么创建的？MessageQueue是和ThreadLocal相关联的，Looper是死循环不断的取出消息就OK了。大概相关的知识点如下：
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Handler中Loop是怎么处理消息的的 | Noah&#39;s Home</title>
+<meta name="description" content="Noah&#39;s Home">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="shortcut icon" href="https://noahzu.github.io//favicon.ico">
+<link rel="stylesheet" href="https://noahzu.github.io//styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://noahzu.github.io/">
+        <img src="https://noahzu.github.io//images/avatar.png" class="site-logo">
+        <h1 class="site-title">Noah&#39;s Home</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="site-description">
+      Noah's Home
+    </div>
+    <div class="site-footer">
+      Noah's Home
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Handler中Loop是怎么处理消息的的</h2>
+            <div class="post-date">2019-07-19</div>
+            
+            <div class="post-content">
+              <pre><code>以前面试面Android的消息机制，只知道回答Looper的创建是怎么创建的？MessageQueue是和ThreadLocal相关联的，Looper是死循环不断的取出消息就OK了。大概相关的知识点如下：
 </code></pre>
 <ul>
 <li>
@@ -75,41 +139,47 @@ return true;<br>
 }</li>
 </ul>
 </blockquote>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[我的简历]]></title>
-        <id>https://noahzu.github.io//post/resume</id>
-        <link href="https://noahzu.github.io//post/resume">
-        </link>
-        <updated>2019-02-28T08:37:23.000Z</updated>
-        <content type="html"><![CDATA[<p>我的简历</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2018年总结]]></title>
-        <id>https://noahzu.github.io//post/2018-nian-zong-jie</id>
-        <link href="https://noahzu.github.io//post/2018-nian-zong-jie">
-        </link>
-        <updated>2019-02-28T06:45:06.000Z</updated>
-        <summary type="html"><![CDATA[<p>2018总结</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>2018总结</p>
-<!-- more --> 
-<p>2018年总结</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[RxJava2中的操作符总结]]></title>
-        <id>https://noahzu.github.io//post/rxjava2-zhong-de-cao-zuo-fu-zong-jie</id>
-        <link href="https://noahzu.github.io//post/rxjava2-zhong-de-cao-zuo-fu-zong-jie">
-        </link>
-        <updated>2019-02-28T06:38:42.000Z</updated>
-        <summary type="html"><![CDATA[<p>总结RxJava2中的操作符以及他们的应用场景</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>总结RxJava2中的操作符以及他们的应用场景</p>
-<!-- more --> 
-<p>map</p>
-]]></content>
-    </entry>
-</feed>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://noahzu.github.io//post/resume">
+                  <h3 class="post-title">
+                    我的简历
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
