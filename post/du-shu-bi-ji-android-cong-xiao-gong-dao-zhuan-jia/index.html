@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>[读书笔记] Android 从小工到专家 | Noah的博客</title>
+<meta name="description" content="Noah的博客">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="shortcut icon" href="https://noahzu.github.io//favicon.ico">
+<link rel="stylesheet" href="https://noahzu.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://noahzu.github.io/">
+        <img src="https://noahzu.github.io//images/avatar.png" class="site-logo">
+        <h1 class="site-title">Noah的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="site-description">
+      Noah的博客
+    </div>
+    <div class="site-footer">
+      Noah的博客
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">[读书笔记] Android 从小工到专家</h2>
+            <div class="post-date">2019-08-16</div>
+            
+            <div class="post-content">
+              <ul>
+<li>Android的构成基石----四大组件
+<ul>
+<li>Activity
+<ul>
+<li>在Activity和开发人员设置的视图之间还隔着两层：
+<ul>
+<li>实际上视图会被设置给一个Window类，Window中有一个DecorView，他才是整个窗口的顶级视图</li>
+<li>我们设置的视图会被设置到DecorView的mContentParent布局中</li>
+</ul>
+</li>
+<li>启动模式中关于singleInstance的理解
+<ul>
+<li>设置了singleInstance的Activity会在一个独立的任务中开启，且此任务只有这么一个Activity实例</li>
+<li>当再次启动此Activity事，会重用已经存在的任务和实例</li>
+<li>singleInstance保证的是这个系统中只有此Activity这么一个实例</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Service
+<ul>
+<li>理解：无界面的Activity</li>
+<li>IntentService：
+<ul>
+<li>会运行在子线程</li>
+<li>任务结束后自我停止</li>
+<li>用户只需要复写onHandlerIntent函数并在这个函数中完成自己的耗时操作就好了</li>
+</ul>
+</li>
+<li>运行在前台的Service（练一练） 通知
+<ul>
+<li>优先级更高，怎么开启？</li>
+</ul>
+</li>
+<li>AIDL（练一练）
+<ul>
+<li>是什么？
+<ul>
+<li>AIDL就是定义一个接口，客户端（调用端）通过bindService来与远程服务端建立一个链接，在该连接建立时会返回一个IBinder对象，该对象是服务端Binder的BinderProxy，在建立连接时，客户端通过asInterface函数将该BinderProxy对象包装成本地的Proxy，并将远程服务端的BinderProxy对象赋值给Proxy类的mRemote字段，就是通过mRemote执行远程函数调用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Broadcast（广播）
+<ul>
+<li>广播三要素：Broadcast（发送广播）、BroadcastReceiver（接收器）、传递信息的Intent</li>
+<li>普通广播：
+<ul>
+<li>完全异步</li>
+<li>无法终止，知道没有与之匹配的广播接收器为止</li>
+</ul>
+</li>
+<li>有序广播：
+<ul>
+<li>按照优先级接受</li>
+</ul>
+</li>
+<li>本地广播：
+<ul>
+<li>只有同一个同一个应用内才能收到</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ContentProvider（外共享数据）
+<ul>
+<li>本质是对SQLiteOpenHelper的进一步封装</li>
+<li>通过Uri映射来判断选择需要操作数据库中哪个表，进行什么操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建出丰富多彩的UI View与动画
+<ul>
+<li>重要的View控件
+<ul>
+<li>用户界面组成：</li>
+</ul>
+</li>
+<li>必须掌握的最重要的技能---自定义控件</li>
+<li>Scroller的使用</li>
+<li>动画
+<ul>
+<li>帧动画</li>
+<li>补间动画</li>
+<li>属性动画：
+<ul>
+<li>核心类：ValueAnimator：
+<ul>
+<li>给出属性的取值范围、运行时长自动计算属性值在各个动画运行时段的取值</li>
+<li>动画的播放次数、播放模式、以及动画的监听</li>
+<li>简单，他只是负责生成不懂动画时刻的属性值，单一职责</li>
+<li>ObjectAnimator
+<ul>
+<li>继承自ValueAnimator，但是比ValueAnimator更高级，可以操具体控件的属性的值</li>
+<li>极为强大，他能操纵任意对象中的任意属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AnimatorSet
+<ul>
+<li>同时执行多个动画</li>
+</ul>
+</li>
+<li>动画执行时间与速度：
+<ul>
+<li>TypeEvaluator：
+<ul>
+<li>他的作用是根据当前动画已经执行时间占总时间的百分比来计算新的属性值</li>
+</ul>
+</li>
+<li>TimeInterpolator：
+<ul>
+<li>作用是修改动画已执行时间与总时间的百分百，从而可以实现非匀速的一些效果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>保证App流畅的关键因素----多线程
+<ul>
+<li>Android中的消息机制：
+<ul>
+<li>每个Handler都会关联一个消息队列，消息队列被封装在Looper中，而每个Looper又会关联一个线程（存放在ThreadLocal中），最终就等于每个消息队列关联一个线程。Handler相当于处理这个消息队列的消息处理器，即使你创建再多的handler，他发消息都会发到同一个消息队列中去，只不过是哪个Handler发的，消息队列会让哪个Handler来处理</li>
+<li>Handler创建的时候是如何关联Looper的？
+<ul>
+<li>当在主线程中创建Handler的时候，因为主线程（UI线程）启动的时候已经初始化好了一个Looper（消息队列），所以可以直接创建，并自动将创建好的线程唯一的消息队列关联给Handler</li>
+<li>如果在一个子线程中直接创建Handler的话，因为没有创建属于该线程的消息队列，因此Handler会创建失败，解决的方法是在子线程中创建一个消息队列，并让消息队列循环起来以后在进行创建Handler</li>
+</ul>
+</li>
+<li>Looper对象存放在哪里？
+<ul>
+<li>Looper对象是每个线程所持有的唯一的一个消息队列，存在在该线程的一个静态的ThreadLocal变量中，关于ThreadLocal的理解可以看ThreadLocal的理解</li>
+<li>在主线程中在app一启动的时候系统就已经为UI线程创建好了一个Looper并存在了ThreadLocal中，并让这个Looper开始循环起来</li>
+</ul>
+</li>
+<li>Handler为何能处理消息
+<ul>
+<li>Looper建立以后就会立即执行loop方法，他是一个死循环，不断的取消息Message中有一个Handler的变量名为target，如果target不是空，那么就会调用Message中target的dispatchMessage分发到Handler，由Handler来处理这个消息，这也解释了为什么是同一个消息队列不同的Handler post的消息只能自己执行，就是因为每个消息都有一个target来指明了谁发送的自己就会由谁来处理自己</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Android中的多线程
+<ul>
+<li>Runnable才是代表一个任务，Thread相当于Runnable的一个封装，他实现了Runnable</li>
+<li>线程的wait、sleep、join、yield的区别：
+<ul>
+<li>wait()调用后进入等待池，失去对象锁，其他线程可以访问</li>
+<li>sleep()线程休眠，但不释放对象锁，其他线程无法访问</li>
+<li>join() 等待目标线程执行完之后再执行</li>
+<li>yield()线程礼让，目标线程切换为就绪状态，让出执行权限，使得其他线程可以优先执行，但其他线程能否执行时未知的。</li>
+</ul>
+</li>
+<li>与多线程相关的方法
+<ul>
+<li>Callable与Runnable大致相同，不同的是Callable能够有一个返回值，也就是任务执行完以后返回一个值。</li>
+<li>Future相当于任务的一个管理者，提供了对Runnable或者Callable的取消、查询完成结果等FutureTask是他的实现类。经由FutureTask包装后的Runnable或者Callable再扔到线程池中去执行，可以暂停、查询状态，如果Callable还可以查询执行完成后的结果，Runnable则不行。</li>
+</ul>
+</li>
+<li>线程池
+<ul>
+<li>定时执行一些任务———ScheduledThreadPoolExecutor</li>
+</ul>
+</li>
+<li>同步集合
+<ul>
+<li>多线程中的程序优化策略：
+<ul>
+<li>CopyOnWriteArrayList：在进行写之前先复制，写完以后再复制回去</li>
+<li>提高并发效率——ConcurrentHashMap：原理是将数据分段加锁，这样多个线程访问的效率就会提高</li>
+<li>有效的方法——BlockingQueue  队列满了以后就会阻塞，直至不满，生产者消费者模式有用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>同步锁：
+<ul>
+<li>synchronized：
+<ul>
+<li>作用于函数的时候实际上锁的是对象，就是该函数所在类的对象</li>
+<li>作用于class的时候则锁的是整个Class类</li>
+</ul>
+</li>
+<li>显示锁——ReentrantLock与Condition
+<ul>
+<li>获取和释放更加灵活</li>
+<li>轮询锁和定时锁</li>
+<li>公平性</li>
+</ul>
+</li>
+<li>信号量：一般适用于允许多个同事访问但不允许超过一个限制的情况</li>
+<li>循环栅栏：一个同步辅助类，适用于当线程达到一定数量才开始执行的情况</li>
+<li>闭锁CountDownLatch：让一个线程等待，知道条件被满足才继续执行</li>
+</ul>
+</li>
+<li>AsyncTask的工作原理</li>
+<li>一个简单的AsyncTask：SimpleAsyncTask.java</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>性能优化
+<ul>
+<li>布局优化
+<ul>
+<li>使用include标签</li>
+<li>使用merge标签</li>
+<li>ViewStub视图</li>
+<li>布局尽量简单，不要太多的层级，尽量使用RelativeLayout 不要使用AbsoluteLayout</li>
+<li>避免使用LInearLayout的layout_weight属性</li>
+</ul>
+</li>
+<li>内存优化
+<ul>
+<li>如何管理内存：
+<ul>
+<li>珍惜Service资源
+<ul>
+<li>原则就是执行完了就关闭，所以最好的办法就是使用IntentService，他会在处理完他的intent任务之后尽快结束自己</li>
+</ul>
+</li>
+<li>当UI隐藏的时候释放内存
+<ul>
+<li>当用户离开你的UI的时候会回调onTrimMemory 并返回参数TRIM_MEMORY_UI_HIDDEN，可以在此处释放那些仅仅被你的UI使用的资源</li>
+<li>这与onStop不同</li>
+</ul>
+</li>
+<li>当内存紧张时释放部分内存
+<ul>
+<li>onTrimMemory同样可以告诉我们整个设备的内存资源已经开始紧张，下边是他的返回参数的不同级别：
+<ul>
+<li>TRIM_MEMORY_RUNNING_MODERATE:设备处于低内存状态</li>
+<li>TRIM_MEMORYRUNNING_LOW:设备还没被杀死，但是处于更低内存状态</li>
+<li>….</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>检查应该使用多少内存：
+<ul>
+<li>getMemoryClass()获取app可用heap大小 超过这个会oom</li>
+</ul>
+</li>
+<li>避免Bitmaps的浪费：尽量使用图片框架、预加载策略</li>
+<li>使用优化的数据容器：SparseArray...等等</li>
+<li>请注意内存开销
+<ul>
+<li>Enums的内存消耗通常是static constants的2倍</li>
+<li>一个类会使用大概500bytes</li>
+<li>每一个类的实例产生的花销是12-16bytes</li>
+<li>HashMap添加一个entry会占用额外的32bytes</li>
+</ul>
+</li>
+<li>注意代码抽象
+<ul>
+<li>不要过度抽象，过多的抽象也会加重系统负担</li>
+</ul>
+</li>
+<li>避免使用依赖框架</li>
+<li>优化整体性能</li>
+<li>使用ProGuard来剔除不需要的代码</li>
+<li>对最终的apk进行zipalign</li>
+<li>使用多进程</li>
+</ul>
+</li>
+<li>内存泄漏：
+<ul>
+<li>使用Memory Monitor如果内存居高不小或者是GC太频繁，那么就说明出现了内存泄漏</li>
+<li>LeakCanary的使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>性能优化
+<ul>
+<li>过度绘制：
+<ul>
+<li>概念</li>
+<li>检测：开发者选项中的过度绘制功能</li>
+<li>最小化过度绘制：</li>
+<li>使用clipRect为视图定义可绘制区域</li>
+</ul>
+</li>
+<li>Hierarchy Viewer可以将层级可视化</li>
+<li>TraceView 数据采集和分析工具
+<ul>
+<li>每个函数执行时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ThreadLocal的理解：
+<ul>
+<li>通常情况下，我们创建的变量是可以被任何一个线程访问并修改的。而使用ThreadLocal创建的变量只能被当前线程访问，其他线程则无法访问和修改。 而ThreadLocal就是一个关于创建线程局部变量的类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://noahzu.github.io//post/effective-java-xue-xi-bi-ji">
+                  <h3 class="post-title">
+                    [读书笔记]Effective Java
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'e94739d1dd32c6c7ff71',
+        clientSecret: '0e8e373f3d3e0fdb2e9bf9126f5972c4c25d31b2',
+        repo: 'blog-commit',
+        owner: 'Noah',
+        admin: ['Noah'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

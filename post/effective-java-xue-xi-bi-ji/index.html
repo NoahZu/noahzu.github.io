@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>[读书笔记]Effective Java | Noah的博客</title>
+<meta name="description" content="Noah的博客">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="shortcut icon" href="https://noahzu.github.io//favicon.ico">
+<link rel="stylesheet" href="https://noahzu.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://noahzu.github.io/">
+        <img src="https://noahzu.github.io//images/avatar.png" class="site-logo">
+        <h1 class="site-title">Noah的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="site-description">
+      Noah的博客
+    </div>
+    <div class="site-footer">
+      Noah的博客
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">[读书笔记]Effective Java</h2>
+            <div class="post-date">2019-08-16</div>
+            
+            <div class="post-content">
+              <ul>
+<li>第二章：创建和销毁对象
+<ul>
+<li>用静态方法代替构造器：
+<ul>
+<li>好处：
+<ul>
+<li>有名称，代码更易读</li>
+<li>对于对象可以复用的情况，不用每次都创建新的对象·
+<ul>
+<li>为重复的调用返回相同的对象，控制对象的数量，称为实例受控的类</li>
+</ul>
+</li>
+<li>可以返回原类型任何子类型的对象，选择返回的对象的时候有了更大的灵活性
+<ul>
+<li>适用于“基于接口的框架”</li>
+</ul>
+</li>
+<li>可以根据静态工厂的参数值，返回不同类的对象</li>
+<li>方法返回对象所属的类，在编写该静态工厂方法的时候可以不存在
+<ul>
+<li>应用是“服务提供者框架”</li>
+<li>服务提供者框架：
+<ul>
+<li>定义：多个服务提供者实现一个服务，系统为服务提供者的客户端提供多个实现，并把它们从多个实现中解耦出来</li>
+<li>组件：
+<ul>
+<li>服务接口</li>
+<li>提供者注册API</li>
+<li>服务访问API</li>
+<li>服务提供者接口（可选）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>坏处：
+<ul>
+<li>有可能不能被子类化：类不含邮public或者protected的构造器</li>
+<li>即使提供了，但是不能以一种比较直观的方式告诉调用者，很难发现！</li>
+</ul>
+</li>
+<li>静态工厂的惯用名称：
+<ul>
+<li>from：类型转换方法</li>
+<li>of：聚合方法，多个参数，把多个参数合并起来并返回该类的一个实例</li>
+<li>valveOf：</li>
+<li>instance or getInstance 返回的实例是通过参数描述的，有点像单例，但不完全一样</li>
+<li>create or newInstance 类似于getInstance 但是每次都返回一个新的实例</li>
+</ul>
+</li>
+<li>总结：优先考虑静态工厂，而不是构造器</li>
+</ul>
+</li>
+<li>遇到多个构造器参数的时候考虑使用构建器（Builder）
+<ul>
+<li>比如Android中Dialog的创建方式</li>
+<li>当Builder模式应用于类层次结构</li>
+<li>坏处：为了创建一个对象还要额外再创建一个对象</li>
+</ul>
+</li>
+<li>用私有构造器或者枚举类型强化Singleton属性
+<ul>
+<li>实现单例模式的两种常见方法：
+<ul>
+<li>方法：
+<ul>
+<li>持有一个静态final的公有域</li>
+<li>静态工厂方法</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>可以用哪个反射的方式生成新的实例</li>
+<li>要注意序列化反序列化可能会生成新的实例</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三种方法：
+<ul>
+<li>声明一个包含单个元素的枚举类型：
+<ul>
+<li>优点：
+<ul>
+<li>不用管序列化反序列化问题</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>不适用于必须扩展一个超类而不是emun的情况</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通过私有构造器强化不可实例化的能力
+<ul>
+<li>比如系统的一些工具类：Math，Arrays等等实例化没有什么意义</li>
+<li>抽象类避免被实例化行不通的，因为他的子类可以被实例化</li>
+</ul>
+</li>
+<li>优先考虑依赖注入来引用资源
+<ul>
+<li>依赖注入：当创建一个新的实例时，就将资源传到构造器中</li>
+<li>依赖注入的资源具有不可变性，一个资源可以被多个地方依赖注入</li>
+<li>依赖注入也同样适用于构造器、静态工厂和构建器</li>
+<li>java8中增加的接口Supplier<T>表示工厂</li>
+<li>优缺点：
+<ul>
+<li>✔️提升了灵活性和可测试性</li>
+<li>❌会导致项目凌乱不堪，可以用dagger来解决</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>避免创建不必要的对象：
+<ul>
+<li>如果对象是不可变的，那么他就始终可以被复用</li>
+<li>尽量重用一个对象，而不是创建对象</li>
+<li>比如String：
+<ul>
+<li>String s = new String(“hello”) 这种语句会创建一个对象</li>
+<li>String s =“hello” 而这个语句在jvm中会保证同一台虚拟机中运行的代码只要他们包含相同的字符串常量，就可以被重用</li>
+</ul>
+</li>
+<li>优先使用静态工厂方法而不是构造器来避免创建不必要的对象 比如Boolean.valueof</li>
+<li>对于创建成本高的类，如果重复的使用这些类，建议缓存下来重用</li>
+<li>优先使用基本类型而不是装箱类型，要当心无意识的自动装箱</li>
+<li>维护对象池来避免创建对象并不是一种好的做法：
+<ul>
+<li>除非是比较特殊的场景，比如数据库的连接池</li>
+<li>一般情况下，维护对象池代码会乱，而且现代jvm高度优化的垃圾回收机制很容易超过轻量级对象池的性能</li>
+</ul>
+</li>
+<li>消除过期的对象引用：
+<ul>
+<li>如果一个对象引用被无意识地保留起来了，垃圾回收机制不仅不会处理这个对象，而且也不会处理被这个对象所引用的其他对象</li>
+<li>不用的对象要及时清除（将对象的所有引用置为null）还有一个好处是，如果错误的应用对象会立即抛出空指针异常</li>
+<li>缓存可能会导致内存泄漏：
+<ul>
+<li>使用WeakHashMap:只要缓存者外不存在对某个项的引用，他就会被删除</li>
+<li>LinkedHashMap的removeEldestEntry可以移除掉最早的引用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>避免使用终结方法(finalizer)和清除方法</li>
+<li>优先使用try-with-resources而不是try-finally
+<ul>
+<li>用try-finally存在多个需要关闭的引用不仅会让代码一团糟关闭方法本身也会存在异常，而且第二个异常有可能会抹除第一个异常，看不到异常堆栈</li>
+<li>try-with-resource
+<ul>
+<li>必须实现AutoCloseable代表是可被关闭的资源</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三章：对于所有对象都通用的方法
+<ul>
+<li>覆盖equals时请遵守约定</li>
+<li>覆盖equals时总要覆盖hashcode</li>
+<li>始终要覆盖toString</li>
+<li>谨慎的覆盖clone</li>
+<li>考虑实现Comparable接口</li>
+</ul>
+</li>
+<li>第四章：类和接口
+<ul>
+<li>使类和成员的可访问性最小化
+<ul>
+<li>隐藏实现细节，把API与实现细节区隔离开来，封装—软件设计的基本原则之一</li>
+<li>好处：
+<ul>
+<li>解除各组件的耦合关系，独立开发和测试，加快了开发速度，减轻了维护负担</li>
+<li>降低了构建大型系统的风险</li>
+</ul>
+</li>
+<li>怎么做？
+<ul>
+<li>java的访问控制机制</li>
+<li>尽可能使每个类或者成员不被外界访问</li>
+<li>尽量把顶级类做成包级别私有的而不是公有的，如果做成公有的，就有责任永远支持它 -&gt;降低不必要的公有类的可访问性</li>
+<li>如果一个顶级类只是在某一个类的内部使用，那么就应该把它做成哪个类的私有嵌套类</li>
+<li>包含公有可变域的类决不能是公有的</li>
+<li>让类具有公有的静态final数组域或者返回这种域的方法是错误的</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://noahzu.github.io//post/kong-jian-de-bu-ju-he-hui-zhi-liu-cheng">
+                  <h3 class="post-title">
+                    控件的布局和绘制流程
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'e94739d1dd32c6c7ff71',
+        clientSecret: '0e8e373f3d3e0fdb2e9bf9126f5972c4c25d31b2',
+        repo: 'blog-commit',
+        owner: 'Noah',
+        admin: ['Noah'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

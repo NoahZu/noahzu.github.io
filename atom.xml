@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://noahzu.github.io/</id>
     <title>Noah的博客</title>
-    <updated>2019-07-19T12:04:41.026Z</updated>
+    <updated>2019-08-16T03:27:10.733Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://noahzu.github.io/"/>
     <link rel="self" href="https://noahzu.github.io//atom.xml"/>
@@ -11,12 +11,571 @@
     <icon>https://noahzu.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Noah的博客</rights>
     <entry>
+        <title type="html"><![CDATA[[读书笔记] Android 从小工到专家]]></title>
+        <id>https://noahzu.github.io//post/du-shu-bi-ji-android-cong-xiao-gong-dao-zhuan-jia</id>
+        <link href="https://noahzu.github.io//post/du-shu-bi-ji-android-cong-xiao-gong-dao-zhuan-jia">
+        </link>
+        <updated>2019-08-16T03:21:17.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>Android的构成基石----四大组件
+<ul>
+<li>Activity
+<ul>
+<li>在Activity和开发人员设置的视图之间还隔着两层：
+<ul>
+<li>实际上视图会被设置给一个Window类，Window中有一个DecorView，他才是整个窗口的顶级视图</li>
+<li>我们设置的视图会被设置到DecorView的mContentParent布局中</li>
+</ul>
+</li>
+<li>启动模式中关于singleInstance的理解
+<ul>
+<li>设置了singleInstance的Activity会在一个独立的任务中开启，且此任务只有这么一个Activity实例</li>
+<li>当再次启动此Activity事，会重用已经存在的任务和实例</li>
+<li>singleInstance保证的是这个系统中只有此Activity这么一个实例</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Service
+<ul>
+<li>理解：无界面的Activity</li>
+<li>IntentService：
+<ul>
+<li>会运行在子线程</li>
+<li>任务结束后自我停止</li>
+<li>用户只需要复写onHandlerIntent函数并在这个函数中完成自己的耗时操作就好了</li>
+</ul>
+</li>
+<li>运行在前台的Service（练一练） 通知
+<ul>
+<li>优先级更高，怎么开启？</li>
+</ul>
+</li>
+<li>AIDL（练一练）
+<ul>
+<li>是什么？
+<ul>
+<li>AIDL就是定义一个接口，客户端（调用端）通过bindService来与远程服务端建立一个链接，在该连接建立时会返回一个IBinder对象，该对象是服务端Binder的BinderProxy，在建立连接时，客户端通过asInterface函数将该BinderProxy对象包装成本地的Proxy，并将远程服务端的BinderProxy对象赋值给Proxy类的mRemote字段，就是通过mRemote执行远程函数调用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Broadcast（广播）
+<ul>
+<li>广播三要素：Broadcast（发送广播）、BroadcastReceiver（接收器）、传递信息的Intent</li>
+<li>普通广播：
+<ul>
+<li>完全异步</li>
+<li>无法终止，知道没有与之匹配的广播接收器为止</li>
+</ul>
+</li>
+<li>有序广播：
+<ul>
+<li>按照优先级接受</li>
+</ul>
+</li>
+<li>本地广播：
+<ul>
+<li>只有同一个同一个应用内才能收到</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ContentProvider（外共享数据）
+<ul>
+<li>本质是对SQLiteOpenHelper的进一步封装</li>
+<li>通过Uri映射来判断选择需要操作数据库中哪个表，进行什么操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建出丰富多彩的UI View与动画
+<ul>
+<li>重要的View控件
+<ul>
+<li>用户界面组成：</li>
+</ul>
+</li>
+<li>必须掌握的最重要的技能---自定义控件</li>
+<li>Scroller的使用</li>
+<li>动画
+<ul>
+<li>帧动画</li>
+<li>补间动画</li>
+<li>属性动画：
+<ul>
+<li>核心类：ValueAnimator：
+<ul>
+<li>给出属性的取值范围、运行时长自动计算属性值在各个动画运行时段的取值</li>
+<li>动画的播放次数、播放模式、以及动画的监听</li>
+<li>简单，他只是负责生成不懂动画时刻的属性值，单一职责</li>
+<li>ObjectAnimator
+<ul>
+<li>继承自ValueAnimator，但是比ValueAnimator更高级，可以操具体控件的属性的值</li>
+<li>极为强大，他能操纵任意对象中的任意属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AnimatorSet
+<ul>
+<li>同时执行多个动画</li>
+</ul>
+</li>
+<li>动画执行时间与速度：
+<ul>
+<li>TypeEvaluator：
+<ul>
+<li>他的作用是根据当前动画已经执行时间占总时间的百分比来计算新的属性值</li>
+</ul>
+</li>
+<li>TimeInterpolator：
+<ul>
+<li>作用是修改动画已执行时间与总时间的百分百，从而可以实现非匀速的一些效果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>保证App流畅的关键因素----多线程
+<ul>
+<li>Android中的消息机制：
+<ul>
+<li>每个Handler都会关联一个消息队列，消息队列被封装在Looper中，而每个Looper又会关联一个线程（存放在ThreadLocal中），最终就等于每个消息队列关联一个线程。Handler相当于处理这个消息队列的消息处理器，即使你创建再多的handler，他发消息都会发到同一个消息队列中去，只不过是哪个Handler发的，消息队列会让哪个Handler来处理</li>
+<li>Handler创建的时候是如何关联Looper的？
+<ul>
+<li>当在主线程中创建Handler的时候，因为主线程（UI线程）启动的时候已经初始化好了一个Looper（消息队列），所以可以直接创建，并自动将创建好的线程唯一的消息队列关联给Handler</li>
+<li>如果在一个子线程中直接创建Handler的话，因为没有创建属于该线程的消息队列，因此Handler会创建失败，解决的方法是在子线程中创建一个消息队列，并让消息队列循环起来以后在进行创建Handler</li>
+</ul>
+</li>
+<li>Looper对象存放在哪里？
+<ul>
+<li>Looper对象是每个线程所持有的唯一的一个消息队列，存在在该线程的一个静态的ThreadLocal变量中，关于ThreadLocal的理解可以看ThreadLocal的理解</li>
+<li>在主线程中在app一启动的时候系统就已经为UI线程创建好了一个Looper并存在了ThreadLocal中，并让这个Looper开始循环起来</li>
+</ul>
+</li>
+<li>Handler为何能处理消息
+<ul>
+<li>Looper建立以后就会立即执行loop方法，他是一个死循环，不断的取消息Message中有一个Handler的变量名为target，如果target不是空，那么就会调用Message中target的dispatchMessage分发到Handler，由Handler来处理这个消息，这也解释了为什么是同一个消息队列不同的Handler post的消息只能自己执行，就是因为每个消息都有一个target来指明了谁发送的自己就会由谁来处理自己</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Android中的多线程
+<ul>
+<li>Runnable才是代表一个任务，Thread相当于Runnable的一个封装，他实现了Runnable</li>
+<li>线程的wait、sleep、join、yield的区别：
+<ul>
+<li>wait()调用后进入等待池，失去对象锁，其他线程可以访问</li>
+<li>sleep()线程休眠，但不释放对象锁，其他线程无法访问</li>
+<li>join() 等待目标线程执行完之后再执行</li>
+<li>yield()线程礼让，目标线程切换为就绪状态，让出执行权限，使得其他线程可以优先执行，但其他线程能否执行时未知的。</li>
+</ul>
+</li>
+<li>与多线程相关的方法
+<ul>
+<li>Callable与Runnable大致相同，不同的是Callable能够有一个返回值，也就是任务执行完以后返回一个值。</li>
+<li>Future相当于任务的一个管理者，提供了对Runnable或者Callable的取消、查询完成结果等FutureTask是他的实现类。经由FutureTask包装后的Runnable或者Callable再扔到线程池中去执行，可以暂停、查询状态，如果Callable还可以查询执行完成后的结果，Runnable则不行。</li>
+</ul>
+</li>
+<li>线程池
+<ul>
+<li>定时执行一些任务———ScheduledThreadPoolExecutor</li>
+</ul>
+</li>
+<li>同步集合
+<ul>
+<li>多线程中的程序优化策略：
+<ul>
+<li>CopyOnWriteArrayList：在进行写之前先复制，写完以后再复制回去</li>
+<li>提高并发效率——ConcurrentHashMap：原理是将数据分段加锁，这样多个线程访问的效率就会提高</li>
+<li>有效的方法——BlockingQueue  队列满了以后就会阻塞，直至不满，生产者消费者模式有用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>同步锁：
+<ul>
+<li>synchronized：
+<ul>
+<li>作用于函数的时候实际上锁的是对象，就是该函数所在类的对象</li>
+<li>作用于class的时候则锁的是整个Class类</li>
+</ul>
+</li>
+<li>显示锁——ReentrantLock与Condition
+<ul>
+<li>获取和释放更加灵活</li>
+<li>轮询锁和定时锁</li>
+<li>公平性</li>
+</ul>
+</li>
+<li>信号量：一般适用于允许多个同事访问但不允许超过一个限制的情况</li>
+<li>循环栅栏：一个同步辅助类，适用于当线程达到一定数量才开始执行的情况</li>
+<li>闭锁CountDownLatch：让一个线程等待，知道条件被满足才继续执行</li>
+</ul>
+</li>
+<li>AsyncTask的工作原理</li>
+<li>一个简单的AsyncTask：SimpleAsyncTask.java</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>性能优化
+<ul>
+<li>布局优化
+<ul>
+<li>使用include标签</li>
+<li>使用merge标签</li>
+<li>ViewStub视图</li>
+<li>布局尽量简单，不要太多的层级，尽量使用RelativeLayout 不要使用AbsoluteLayout</li>
+<li>避免使用LInearLayout的layout_weight属性</li>
+</ul>
+</li>
+<li>内存优化
+<ul>
+<li>如何管理内存：
+<ul>
+<li>珍惜Service资源
+<ul>
+<li>原则就是执行完了就关闭，所以最好的办法就是使用IntentService，他会在处理完他的intent任务之后尽快结束自己</li>
+</ul>
+</li>
+<li>当UI隐藏的时候释放内存
+<ul>
+<li>当用户离开你的UI的时候会回调onTrimMemory 并返回参数TRIM_MEMORY_UI_HIDDEN，可以在此处释放那些仅仅被你的UI使用的资源</li>
+<li>这与onStop不同</li>
+</ul>
+</li>
+<li>当内存紧张时释放部分内存
+<ul>
+<li>onTrimMemory同样可以告诉我们整个设备的内存资源已经开始紧张，下边是他的返回参数的不同级别：
+<ul>
+<li>TRIM_MEMORY_RUNNING_MODERATE:设备处于低内存状态</li>
+<li>TRIM_MEMORYRUNNING_LOW:设备还没被杀死，但是处于更低内存状态</li>
+<li>….</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>检查应该使用多少内存：
+<ul>
+<li>getMemoryClass()获取app可用heap大小 超过这个会oom</li>
+</ul>
+</li>
+<li>避免Bitmaps的浪费：尽量使用图片框架、预加载策略</li>
+<li>使用优化的数据容器：SparseArray...等等</li>
+<li>请注意内存开销
+<ul>
+<li>Enums的内存消耗通常是static constants的2倍</li>
+<li>一个类会使用大概500bytes</li>
+<li>每一个类的实例产生的花销是12-16bytes</li>
+<li>HashMap添加一个entry会占用额外的32bytes</li>
+</ul>
+</li>
+<li>注意代码抽象
+<ul>
+<li>不要过度抽象，过多的抽象也会加重系统负担</li>
+</ul>
+</li>
+<li>避免使用依赖框架</li>
+<li>优化整体性能</li>
+<li>使用ProGuard来剔除不需要的代码</li>
+<li>对最终的apk进行zipalign</li>
+<li>使用多进程</li>
+</ul>
+</li>
+<li>内存泄漏：
+<ul>
+<li>使用Memory Monitor如果内存居高不小或者是GC太频繁，那么就说明出现了内存泄漏</li>
+<li>LeakCanary的使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>性能优化
+<ul>
+<li>过度绘制：
+<ul>
+<li>概念</li>
+<li>检测：开发者选项中的过度绘制功能</li>
+<li>最小化过度绘制：</li>
+<li>使用clipRect为视图定义可绘制区域</li>
+</ul>
+</li>
+<li>Hierarchy Viewer可以将层级可视化</li>
+<li>TraceView 数据采集和分析工具
+<ul>
+<li>每个函数执行时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ThreadLocal的理解：
+<ul>
+<li>通常情况下，我们创建的变量是可以被任何一个线程访问并修改的。而使用ThreadLocal创建的变量只能被当前线程访问，其他线程则无法访问和修改。 而ThreadLocal就是一个关于创建线程局部变量的类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[读书笔记]Effective Java]]></title>
+        <id>https://noahzu.github.io//post/effective-java-xue-xi-bi-ji</id>
+        <link href="https://noahzu.github.io//post/effective-java-xue-xi-bi-ji">
+        </link>
+        <updated>2019-08-16T03:14:24.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>第二章：创建和销毁对象
+<ul>
+<li>用静态方法代替构造器：
+<ul>
+<li>好处：
+<ul>
+<li>有名称，代码更易读</li>
+<li>对于对象可以复用的情况，不用每次都创建新的对象·
+<ul>
+<li>为重复的调用返回相同的对象，控制对象的数量，称为实例受控的类</li>
+</ul>
+</li>
+<li>可以返回原类型任何子类型的对象，选择返回的对象的时候有了更大的灵活性
+<ul>
+<li>适用于“基于接口的框架”</li>
+</ul>
+</li>
+<li>可以根据静态工厂的参数值，返回不同类的对象</li>
+<li>方法返回对象所属的类，在编写该静态工厂方法的时候可以不存在
+<ul>
+<li>应用是“服务提供者框架”</li>
+<li>服务提供者框架：
+<ul>
+<li>定义：多个服务提供者实现一个服务，系统为服务提供者的客户端提供多个实现，并把它们从多个实现中解耦出来</li>
+<li>组件：
+<ul>
+<li>服务接口</li>
+<li>提供者注册API</li>
+<li>服务访问API</li>
+<li>服务提供者接口（可选）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>坏处：
+<ul>
+<li>有可能不能被子类化：类不含邮public或者protected的构造器</li>
+<li>即使提供了，但是不能以一种比较直观的方式告诉调用者，很难发现！</li>
+</ul>
+</li>
+<li>静态工厂的惯用名称：
+<ul>
+<li>from：类型转换方法</li>
+<li>of：聚合方法，多个参数，把多个参数合并起来并返回该类的一个实例</li>
+<li>valveOf：</li>
+<li>instance or getInstance 返回的实例是通过参数描述的，有点像单例，但不完全一样</li>
+<li>create or newInstance 类似于getInstance 但是每次都返回一个新的实例</li>
+</ul>
+</li>
+<li>总结：优先考虑静态工厂，而不是构造器</li>
+</ul>
+</li>
+<li>遇到多个构造器参数的时候考虑使用构建器（Builder）
+<ul>
+<li>比如Android中Dialog的创建方式</li>
+<li>当Builder模式应用于类层次结构</li>
+<li>坏处：为了创建一个对象还要额外再创建一个对象</li>
+</ul>
+</li>
+<li>用私有构造器或者枚举类型强化Singleton属性
+<ul>
+<li>实现单例模式的两种常见方法：
+<ul>
+<li>方法：
+<ul>
+<li>持有一个静态final的公有域</li>
+<li>静态工厂方法</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>可以用哪个反射的方式生成新的实例</li>
+<li>要注意序列化反序列化可能会生成新的实例</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三种方法：
+<ul>
+<li>声明一个包含单个元素的枚举类型：
+<ul>
+<li>优点：
+<ul>
+<li>不用管序列化反序列化问题</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>不适用于必须扩展一个超类而不是emun的情况</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通过私有构造器强化不可实例化的能力
+<ul>
+<li>比如系统的一些工具类：Math，Arrays等等实例化没有什么意义</li>
+<li>抽象类避免被实例化行不通的，因为他的子类可以被实例化</li>
+</ul>
+</li>
+<li>优先考虑依赖注入来引用资源
+<ul>
+<li>依赖注入：当创建一个新的实例时，就将资源传到构造器中</li>
+<li>依赖注入的资源具有不可变性，一个资源可以被多个地方依赖注入</li>
+<li>依赖注入也同样适用于构造器、静态工厂和构建器</li>
+<li>java8中增加的接口Supplier<T>表示工厂</li>
+<li>优缺点：
+<ul>
+<li>✔️提升了灵活性和可测试性</li>
+<li>❌会导致项目凌乱不堪，可以用dagger来解决</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>避免创建不必要的对象：
+<ul>
+<li>如果对象是不可变的，那么他就始终可以被复用</li>
+<li>尽量重用一个对象，而不是创建对象</li>
+<li>比如String：
+<ul>
+<li>String s = new String(“hello”) 这种语句会创建一个对象</li>
+<li>String s =“hello” 而这个语句在jvm中会保证同一台虚拟机中运行的代码只要他们包含相同的字符串常量，就可以被重用</li>
+</ul>
+</li>
+<li>优先使用静态工厂方法而不是构造器来避免创建不必要的对象 比如Boolean.valueof</li>
+<li>对于创建成本高的类，如果重复的使用这些类，建议缓存下来重用</li>
+<li>优先使用基本类型而不是装箱类型，要当心无意识的自动装箱</li>
+<li>维护对象池来避免创建对象并不是一种好的做法：
+<ul>
+<li>除非是比较特殊的场景，比如数据库的连接池</li>
+<li>一般情况下，维护对象池代码会乱，而且现代jvm高度优化的垃圾回收机制很容易超过轻量级对象池的性能</li>
+</ul>
+</li>
+<li>消除过期的对象引用：
+<ul>
+<li>如果一个对象引用被无意识地保留起来了，垃圾回收机制不仅不会处理这个对象，而且也不会处理被这个对象所引用的其他对象</li>
+<li>不用的对象要及时清除（将对象的所有引用置为null）还有一个好处是，如果错误的应用对象会立即抛出空指针异常</li>
+<li>缓存可能会导致内存泄漏：
+<ul>
+<li>使用WeakHashMap:只要缓存者外不存在对某个项的引用，他就会被删除</li>
+<li>LinkedHashMap的removeEldestEntry可以移除掉最早的引用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>避免使用终结方法(finalizer)和清除方法</li>
+<li>优先使用try-with-resources而不是try-finally
+<ul>
+<li>用try-finally存在多个需要关闭的引用不仅会让代码一团糟关闭方法本身也会存在异常，而且第二个异常有可能会抹除第一个异常，看不到异常堆栈</li>
+<li>try-with-resource
+<ul>
+<li>必须实现AutoCloseable代表是可被关闭的资源</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三章：对于所有对象都通用的方法
+<ul>
+<li>覆盖equals时请遵守约定</li>
+<li>覆盖equals时总要覆盖hashcode</li>
+<li>始终要覆盖toString</li>
+<li>谨慎的覆盖clone</li>
+<li>考虑实现Comparable接口</li>
+</ul>
+</li>
+<li>第四章：类和接口
+<ul>
+<li>使类和成员的可访问性最小化
+<ul>
+<li>隐藏实现细节，把API与实现细节区隔离开来，封装—软件设计的基本原则之一</li>
+<li>好处：
+<ul>
+<li>解除各组件的耦合关系，独立开发和测试，加快了开发速度，减轻了维护负担</li>
+<li>降低了构建大型系统的风险</li>
+</ul>
+</li>
+<li>怎么做？
+<ul>
+<li>java的访问控制机制</li>
+<li>尽可能使每个类或者成员不被外界访问</li>
+<li>尽量把顶级类做成包级别私有的而不是公有的，如果做成公有的，就有责任永远支持它 -&gt;降低不必要的公有类的可访问性</li>
+<li>如果一个顶级类只是在某一个类的内部使用，那么就应该把它做成哪个类的私有嵌套类</li>
+<li>包含公有可变域的类决不能是公有的</li>
+<li>让类具有公有的静态final数组域或者返回这种域的方法是错误的</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[控件的布局和绘制流程]]></title>
+        <id>https://noahzu.github.io//post/kong-jian-de-bu-ju-he-hui-zhi-liu-cheng</id>
+        <link href="https://noahzu.github.io//post/kong-jian-de-bu-ju-he-hui-zhi-liu-cheng">
+        </link>
+        <updated>2019-07-23T02:06:49.000Z</updated>
+        <content type="html"><![CDATA[<p>的</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Android事件分发机制]]></title>
         <id>https://noahzu.github.io//post/android-shi-jian-fen-fa-ji-zhi</id>
         <link href="https://noahzu.github.io//post/android-shi-jian-fen-fa-ji-zhi">
         </link>
         <updated>2019-07-19T12:04:20.000Z</updated>
-        <content type="html"><![CDATA[<p>事件分发</p>
+        <content type="html"><![CDATA[<ul>
+<li>事件流：整个事件分发流程，会有大量的MotionEvent对象，一次完整的流程包含：ACTION_DOWN(1次) -&gt; ACTION_MOVE(N次) -&gt; ACTION_UP(1次)。我喜欢用流的视角去看待这些点击事件，我们称之为事件流。</li>
+<li>事件分发的顺序<br>
+一个点击事件发生后，首先传到Activity，再传到ViewGroup，最终传到View</li>
+<li>协作完成事件分发的三个方法
+<ul>
+<li>dispatchTouchEvent(event) : boolean --&gt; 当前控件被分发到事件的入口，返回true，代表事件被当前控件消费，false代表不消费</li>
+<li>onTouchEvent(event) : boolean --&gt; 处理点击事件</li>
+<li>onInterceptTouchEvent(event) : boolean --&gt; 判断是否拦截了某事件</li>
+</ul>
+</li>
+<li>事件的分发流程：
+<ul>
+<li>Activity对点击事件的分发机制：
+<ul>
+<li>Activity#dispatchTouchEvent --&gt; PhoneWindow#superDispatchTouchEvent --&gt; DecorView#superDispatchTouchEvent --&gt; DecorView(ViewGroup)#dispatchTouchEvent 经过这个流程，事件就由Activity分发到了ViewGroup</li>
+<li>ViewGroup对事件的分发</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>

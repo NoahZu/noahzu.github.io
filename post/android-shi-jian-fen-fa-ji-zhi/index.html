@@ -86,7 +86,28 @@
             <div class="post-date">2019-07-19</div>
             
             <div class="post-content">
-              <p>事件分发</p>
+              <ul>
+<li>事件流：整个事件分发流程，会有大量的MotionEvent对象，一次完整的流程包含：ACTION_DOWN(1次) -&gt; ACTION_MOVE(N次) -&gt; ACTION_UP(1次)。我喜欢用流的视角去看待这些点击事件，我们称之为事件流。</li>
+<li>事件分发的顺序<br>
+一个点击事件发生后，首先传到Activity，再传到ViewGroup，最终传到View</li>
+<li>协作完成事件分发的三个方法
+<ul>
+<li>dispatchTouchEvent(event) : boolean --&gt; 当前控件被分发到事件的入口，返回true，代表事件被当前控件消费，false代表不消费</li>
+<li>onTouchEvent(event) : boolean --&gt; 处理点击事件</li>
+<li>onInterceptTouchEvent(event) : boolean --&gt; 判断是否拦截了某事件</li>
+</ul>
+</li>
+<li>事件的分发流程：
+<ul>
+<li>Activity对点击事件的分发机制：
+<ul>
+<li>Activity#dispatchTouchEvent --&gt; PhoneWindow#superDispatchTouchEvent --&gt; DecorView#superDispatchTouchEvent --&gt; DecorView(ViewGroup)#dispatchTouchEvent 经过这个流程，事件就由Activity分发到了ViewGroup</li>
+<li>ViewGroup对事件的分发</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
             </div>
             
